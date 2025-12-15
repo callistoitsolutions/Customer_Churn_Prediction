@@ -1,6 +1,6 @@
 """
 Streamlit App for Telecom Customer Churn Prediction
-Professional & Attractive UI Design
+Professional & Light UI Design
 """
 
 import streamlit as st
@@ -21,106 +21,160 @@ st.set_page_config(
     initial_sidebar_state='expanded'
 )
 
-# Enhanced Custom CSS
+# Enhanced Custom CSS - Light Theme
 st.markdown("""
     <style>
-    /* Main container styling */
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+    /* Main container styling - Light background */
     .main {
         padding: 2rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        font-family: 'Poppins', sans-serif;
     }
     
-    /* Card styling */
     .stApp {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
     
-    /* Custom header */
+    /* Custom header - Gradient with good contrast */
     .custom-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 10px;
+        padding: 2.5rem;
+        border-radius: 15px;
         text-align: center;
         color: white;
         margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
     }
     
-    /* Metric cards */
+    /* Metric cards - White with colored accents */
     div[data-testid="metric-container"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 1rem;
+        background: white;
+        border-left: 4px solid #667eea;
+        padding: 1.2rem;
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
-    /* Form styling */
+    div[data-testid="metric-container"] label {
+        color: #667eea !important;
+        font-weight: 600 !important;
+    }
+    
+    div[data-testid="metric-container"] [data-testid="stMetricValue"] {
+        color: #2d3748 !important;
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Form styling - Clean white */
     .stForm {
         background: white;
         padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e2e8f0;
     }
     
-    /* Button styling */
+    /* Button styling - Vibrant gradient */
     .stButton>button {
         width: 100%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        font-weight: bold;
+        font-weight: 600;
         border: none;
         padding: 0.75rem 2rem;
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         transition: all 0.3s ease;
+        font-size: 1rem;
     }
     
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Download button */
+    .stDownloadButton>button {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        font-weight: 600;
     }
     
     /* Dataframe styling */
     .dataframe {
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background: white;
     }
     
-    /* Sidebar styling */
+    /* Sidebar styling - Light gradient */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown {
         color: white;
     }
     
-    /* Tab styling */
+    /* Tab styling - Modern and clean */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
+        gap: 10px;
         background-color: transparent;
     }
     
     .stTabs [data-baseweb="tab"] {
         background: white;
         border-radius: 10px;
-        padding: 10px 20px;
-        font-weight: bold;
+        padding: 12px 24px;
+        font-weight: 600;
+        color: #4a5568;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        border-color: #667eea;
+        color: #667eea;
     }
     
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        color: white !important;
+        border: 2px solid transparent;
     }
     
-    /* Alert boxes */
+    /* Alert boxes - Light themed */
     .stAlert {
         border-radius: 10px;
         border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background: white;
     }
     
-    /* Success box */
+    /* Success alert */
+    div[data-baseweb="notification"] {
+        background: white;
+        border-left: 4px solid #48bb78;
+    }
+    
+    /* Error alert */
+    .stAlert[kind="error"] {
+        background: white;
+        border-left: 4px solid #f56565;
+    }
+    
+    /* Info alert */
+    .stAlert[kind="info"] {
+        background: white;
+        border-left: 4px solid #4299e1;
+    }
+    
+    /* Animation */
     .element-container:has(.stSuccess) {
         animation: slideIn 0.5s ease-out;
     }
@@ -136,23 +190,77 @@ st.markdown("""
         }
     }
     
-    /* File uploader */
+    /* File uploader - Clean white */
     .uploadedFile {
         border-radius: 10px;
         background: white;
         padding: 1rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e2e8f0;
+    }
+    
+    /* Headers */
+    h1, h2, h3 {
+        color: #2d3748;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
     }
     
     /* Subheader styling */
-    .stSubheader {
+    .stMarkdown h3 {
         color: #667eea;
-        font-weight: bold;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+    
+    /* Expander - Clean white */
+    .streamlit-expanderHeader {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        font-weight: 600;
+    }
+    
+    /* Input fields */
+    .stTextInput>div>div>input,
+    .stNumberInput>div>div>input,
+    .stSelectbox>div>div>div {
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+        background: white;
+    }
+    
+    .stTextInput>div>div>input:focus,
+    .stNumberInput>div>div>input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 1px #667eea;
+    }
+    
+    /* Radio buttons */
+    .stRadio>div {
+        background: white;
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+    
+    /* Slider */
+    .stSlider>div>div>div>div {
+        background: #667eea;
     }
     
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    
+    /* Card effect for sections */
+    .card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 1rem;
+        border: 1px solid #e2e8f0;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -242,8 +350,8 @@ def main():
     # Animated Header
     st.markdown("""
         <div class="custom-header">
-            <h1>🎯 Churn Predictor Pro</h1>
-            <p style='font-size: 1.2rem; margin-top: 1rem;'>AI-Powered Customer Retention Intelligence</p>
+            <h1 style='margin:0; font-size: 2.5rem;'>🎯 Churn Predictor Pro</h1>
+            <p style='font-size: 1.2rem; margin-top: 1rem; opacity: 0.95;'>AI-Powered Customer Retention Intelligence</p>
         </div>
     """, unsafe_allow_html=True)
     
