@@ -112,13 +112,50 @@ st.markdown("""
         background: white;
     }
     
-    /* Sidebar styling - Light gradient */
+    /* Sidebar styling - Light gradient with white text */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
     }
     
+    /* Sidebar text - All white */
+    section[data-testid="stSidebar"] * {
+        color: white !important;
+    }
+    
     section[data-testid="stSidebar"] .stMarkdown {
-        color: white;
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] h4,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] label {
+        color: white !important;
+    }
+    
+    /* Sidebar expander */
+    section[data-testid="stSidebar"] .streamlit-expanderHeader {
+        background: rgba(255, 255, 255, 0.1);
+        color: white !important;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    section[data-testid="stSidebar"] .streamlit-expanderHeader:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Sidebar info boxes */
+    section[data-testid="stSidebar"] .stAlert {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stAlert * {
+        color: white !important;
     }
     
     /* Tab styling - Modern and clean */
